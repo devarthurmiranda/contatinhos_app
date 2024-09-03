@@ -53,6 +53,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 onPressed: () {
                   Get.toNamed('/updateProfile');
                 },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(200, 45),
+                ),
                 child: const Text('Edit Profile'),
               ),
             ),
@@ -62,7 +65,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 onPressed: () {
                   userController.logout();
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                  minimumSize: const Size(200, 45),
+                ),
                 child: const Text('Logout'),
               ),
             ),
@@ -72,7 +78,10 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                   onPressed: () {
                     userController.delete();
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    minimumSize: const Size(200, 45),
+                  ),
                   child: const Text('Delete Account')),
             )
           ],

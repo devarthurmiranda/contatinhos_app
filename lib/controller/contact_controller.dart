@@ -41,9 +41,12 @@ class ContactController extends GetxController {
     return token;
   }
 
-  Future<void> updateContact() async {
+  Future<void> updateContact(
+      String id, String name, String description, String phone) async {
     String? token = await getToken();
-    if (await _service.updateContact(token)) {
+    String? userId = await _userController.getUserId();
+    if (await _service.updateContact(
+        token, id, userId, name, description, phone)) {
       Get.offNamed('/home');
     } else {
       print('Failed to update contact');

@@ -38,13 +38,22 @@ class ContactService {
     }
   }
 
-  Future<bool> updateContact(token) async {
+  Future<bool> updateContact(
+      token, id, userId, name, description, phone) async {
     const url = 'http://191.252.222.51/contatinhos';
-    final response = await http.put(Uri.parse(url),
-        headers: <String, String>{HttpHeaders.authorizationHeader: token});
-    if (response.statusCode == 200) {
+    final response = await http.put(Uri.parse(url), headers: <String, String>{
+      HttpHeaders.authorizationHeader: token
+    }, body: {
+      'id': id,
+      'nome': name,
+      'descricao': description,
+      'telefone': phone,
+      'usuarioId': userId
+    });
+    if (response.statusCode == 201) {
       return true;
     } else {
+      print(response.body);
       return false;
     }
   }

@@ -26,6 +26,7 @@ class _UserEditContactScreenState extends State<UserEditContactScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final id = Get.arguments['id'];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar Contato'),
@@ -58,7 +59,8 @@ class _UserEditContactScreenState extends State<UserEditContactScreen> {
                 margin: const EdgeInsets.only(top: 20),
                 child: ElevatedButton(
                   onPressed: () {
-                    _contactController.updateContact();
+                    _contactController.updateContact(id, _nameController.text,
+                        _descriptionController.text, _phoneController.text);
                   },
                   child: const Text('Salvar'),
                 ),

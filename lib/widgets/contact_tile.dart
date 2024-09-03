@@ -38,7 +38,13 @@ class _ContactTileState extends State<ContactTile> {
             children: [
               IconButton(
                 onPressed: () {
-                  Get.toNamed('/updateProfile');
+                  // https://medium.com/@onalojoseph96/getx-routing-management-in-flutter-7c44f785e592
+                  Get.toNamed('/editContact', arguments: {
+                    'id': _contact.id.toString(),
+                    'nome': _contact.nome,
+                    'descricao': _contact.descricao,
+                    'telefone': _contact.telefone
+                  });
                 },
                 icon: const Icon(Icons.edit_document),
               ),

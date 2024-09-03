@@ -37,6 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(300, 50),
+                ),
                 onPressed: () {
                   Get.toNamed('/login');
                 },
@@ -46,6 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               margin: const EdgeInsets.only(top: 20),
               child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(300, 50),
+                  ),
                   onPressed: () {
                     Get.toNamed('/signin');
                   },
