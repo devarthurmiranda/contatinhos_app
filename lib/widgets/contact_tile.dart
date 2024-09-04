@@ -47,13 +47,7 @@ class _ContactTileState extends State<ContactTile> {
                   });
                 },
                 icon: const Icon(Icons.edit_document),
-              ),
-              IconButton(
-                onPressed: () {
-                  controller.delete(_contact);
-                },
-                icon: const Icon(Icons.delete),
-              ),
+              )
             ],
           )),
     );

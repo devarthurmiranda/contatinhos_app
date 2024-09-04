@@ -12,6 +12,12 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
   UserController userController = Get.put(UserController());
+  @override
+  void initState() {
+    super.initState();
+    UserController userController = Get.put(UserController());
+    userController.isLogged();
+  }
 
   @override
   Widget build(BuildContext context) {

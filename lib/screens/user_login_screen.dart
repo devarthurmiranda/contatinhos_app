@@ -15,6 +15,14 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    userController.isLogged().then((success) {
+      Get.offAllNamed("/home");
+    }).catchError((error) => print(error));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

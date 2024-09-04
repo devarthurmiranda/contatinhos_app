@@ -16,6 +16,13 @@ class _UserUpdateScreenState extends State<UserUpdateScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    UserController userController = Get.put(UserController());
+    userController.isLogged();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

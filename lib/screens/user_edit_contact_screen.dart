@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projeto_contatinhos/controller/contact_controller.dart';
-import 'package:projeto_contatinhos/model/contact_model.dart';
+import 'package:projeto_contatinhos/controller/user_controller.dart';
 
 class UserEditContactScreen extends StatefulWidget {
   const UserEditContactScreen({super.key});
@@ -22,11 +22,21 @@ class _UserEditContactScreenState extends State<UserEditContactScreen> {
     _nameController = TextEditingController();
     _descriptionController = TextEditingController();
     _phoneController = TextEditingController();
+    UserController userController = Get.put(UserController());
+    userController.isLogged();
   }
 
   @override
   Widget build(BuildContext context) {
     final id = Get.arguments['id'];
+    final name = Get.arguments['nome'];
+    final description = Get.arguments['descricao'];
+    final phone = Get.arguments['telefone'];
+
+    _nameController.text = name;
+    _descriptionController.text = description;
+    _phoneController.text = phone;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Editar Contato'),
@@ -44,7 +54,7 @@ class _UserEditContactScreenState extends State<UserEditContactScreen> {
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: TextField(
-                  decoration: const InputDecoration(labelText: 'Descrição'),
+                  decoration: const InputDecoration(labelText: 'Descricao'),
                   controller: _descriptionController,
                 ),
               ),

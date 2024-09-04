@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projeto_contatinhos/controller/user_controller.dart';
 //import 'package:projeto_contatinhos/controller/user_controller.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,14 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  /*
   @override
   void initState() {
     super.initState();
     UserController userController = Get.put(UserController());
-    userController.isLogged();
+    userController.goHome();
   }
-  */
 
   @override
   Widget build(BuildContext context) {

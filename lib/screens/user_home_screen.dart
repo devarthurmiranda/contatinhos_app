@@ -19,8 +19,10 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   @override
   void initState() {
     super.initState();
-    contactController
-        .getContacts(); // Fetch contacts when the screen is initialized
+    userController.isLogged().then((success) {
+      contactController.getContacts();
+    }).catchError((error) => print(error));
+    // Fetch contacts when the screen is initialized
   }
 
   @override
@@ -40,13 +42,29 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
       ),
       body: Obx(() {
         if (contactController.contacts.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: Text(
+              'Sem contatinhos ainda :(',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          );
         } else {
           return ListView.builder(
             itemCount: contactController.contacts.length,
             itemBuilder: (context, index) {
               Contact contact = contactController.contacts[index];
-              return ContactTile(contact);
+              return Dismissible(
+                key: UniqueKey(),
+                background: Container(
+                    color: Colors.red,
+                    alignment: Alignment.centerRight,
+                    child: const Icon(Icons.delete, color: Colors.white)),
+                onDismissed: (direction) {
+                  contactController.delete(contact);
+                },
+                child: ContactTile(contact),
+              );
             },
           );
         }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projeto_contatinhos/controller/contact_controller.dart';
 
+import '../controller/user_controller.dart';
+
 class UserAddContactScreen extends StatefulWidget {
   const UserAddContactScreen({super.key});
 
@@ -14,6 +16,13 @@ class _UserAddContactScreenState extends State<UserAddContactScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    UserController userController = Get.put(UserController());
+    userController.isLogged();
+  }
 
   @override
   Widget build(BuildContext context) {

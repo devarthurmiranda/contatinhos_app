@@ -8,14 +8,14 @@ class ContactController extends GetxController {
   final ContactService _service = ContactService();
   final UserController _userController = Get.put(UserController());
   late SharedPreferences prefs;
-  var _contacts = <Contact>[].obs; // Make it observable
+  var _contacts = <Contact>[].obs;
   List<Contact> get contacts => _contacts;
 
   void addContact(String name, String description, String phone) async {
     String? userId = await _userController.getUserId();
     String? token = await getToken();
     if (await _service.createContact(token, name, description, phone, userId)) {
-      Get.offNamed('/home');
+      Get.back();
     } else {
       print('falha ao cadastrar');
     }
@@ -25,7 +25,7 @@ class ContactController extends GetxController {
     String? token = await getToken();
 
     if (await _service.deleteContact(token, contact.id)) {
-      _contacts.remove(contact); // This will trigger UI updates
+      _contacts.remove(contact);
     }
   }
 
@@ -47,7 +47,7 @@ class ContactController extends GetxController {
     String? userId = await _userController.getUserId();
     if (await _service.updateContact(
         token, id, userId, name, description, phone)) {
-      Get.offNamed('/home');
+      Get.back();
     } else {
       print('Failed to update contact');
     }

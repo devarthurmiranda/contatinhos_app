@@ -11,6 +11,7 @@ class UserController extends GetxController {
   Future<String?> getToken() async {
     prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
+    print(token);
     return token;
   }
 
@@ -51,7 +52,7 @@ class UserController extends GetxController {
 
   Future<void> login(String email, String password) async {
     if (await _service.login(email, password)) {
-      Get.offNamed('/home');
+      Get.offAllNamed('/home');
     } else {
       Get.snackbar("Falha ao realizar Login!", "Email ou Senha incorretos",
           duration: const Duration(seconds: 2),
@@ -63,7 +64,7 @@ class UserController extends GetxController {
 
   Future<void> signin(String username, String email, String password) async {
     if (await _service.signIn(username, email, password)) {
-      Get.offNamed('/login');
+      Get.offAllNamed('/login');
     } else {
       Get.snackbar("Falha ao realizar Cadastro!",
           "Por favor, tente novamente mais tarde",
@@ -73,14 +74,18 @@ class UserController extends GetxController {
           snackPosition: SnackPosition.BOTTOM);
     }
   }
-  /*
+
   Future<void> isLogged() async {
-    if (await getToken() != ' ') {
-      Get.offNamed('/home');
-    } else {
-      Get.offNamed('/login');
+    if (await getToken() == null) {
+      Get.offAllNamed('/');
     }
-  }*/
+  }
+
+  Future<void> goHome() async {
+    if (await getToken() != null) {
+      Get.offAllNamed('/home');
+    }
+  }
 
   Future logout() async {
     String? token = await getToken();
@@ -88,8 +93,8 @@ class UserController extends GetxController {
       String tokenSafe = token;
       if (await _service.logout(tokenSafe)) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString('token', ' ');
-        Get.offNamed('/');
+        prefs.remove('token');
+        Get.offAllNamed('/');
       }
     } else {
       Get.snackbar("Falha ao realizar Logout!",
@@ -106,7 +111,7 @@ class UserController extends GetxController {
     if (token != null) {
       String tokenSafe = token;
       if (await _service.deleteUser(tokenSafe)) {
-        Get.offNamed('/');
+        Get.offAllNamed('/');
       } else {
         Get.snackbar("Falha ao deletar conta!",
             "Por favor, tente novamente mais tarde :(",
